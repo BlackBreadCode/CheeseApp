@@ -1,0 +1,842 @@
+<CalBT@Button>
+    
+    background_normal: ''
+    background_color: 255/255, 210/255, 139/255, 1
+
+<List>
+    ScrollView:
+        MDList:
+            OneLineListItem:
+                text: "Calculator"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "Basic_Calculator"
+            OneLineListItem:
+                text: "Class4"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "Class4"
+            OneLineListItem:
+                text: "Class5"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "Class5"
+            OneLineListItem:
+                text: "Class6"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "Class6"
+MDScreen:
+    MDBoxLayout:
+        orientation: 'vertical'
+        MDToolbar:
+            id: toolbar
+            pos_hint: {"top": 1}
+            elevation: 12
+            title: "CheeseCulatorApp"     
+            left_action_items: [["menu", lambda x: nav.set_state("open")]]
+        MDNavigationLayout:
+            x: toolbar.height
+            ScreenManager:
+                id: screen_manager
+                
+                MDScreen:
+                    name: "Basic_Calculator"
+					BC_Calc:
+
+                MDScreen:
+                    name: "Class4"
+                    MDTabs:
+                        id:Tabs_Class4
+
+
+                MDScreen:
+                    name: "Class5"
+                    MDTabs:
+                        id:Tabs_Class5
+                    
+                
+                MDScreen:
+                    name: "Class6"
+                    MDTabs:
+                        id:Tabs_Class6
+            
+            MDNavigationDrawer:
+                id: nav
+                List:
+                    screen_manager: screen_manager
+                    nav_drawer: nav
+<BC_Calc>:
+	orientation: 'vertical'
+	size: root.width,root.height 
+	TextInput:
+		multiline: False
+		id:calc_input
+		text: "0"
+		halign: "right"
+		font_size: 42
+		size_hint_y:.2
+		background_color: 255/255, 249/255, 240/255, 1
+		foreground_color: 120/255, 86/255, 67/255, 1
+	MDGridLayout:
+		cols:4
+		rows:6
+		
+		CalBT:
+			text: "("
+			font_size: 24
+			background_color: 252/255, 172/255, 172/255, 1
+			on_press: root.button_press('(')
+		CalBT:
+			text: ")"
+			font_size: 24
+			background_color: 252/255, 172/255, 172/255, 1
+			on_press: root.button_press(")")
+		CalBT:
+			id: clear
+			text: "C"
+			font_size: 24
+			background_color: 252/255, 172/255, 172/255, 1
+			on_press: root.clear()
+		CalBT:
+			text: "«"
+			font_size: 30
+			background_color: 252/255, 172/255, 172/255, 1
+			on_press: root.remove_last()
+#===========================================================================
+		CalBT:
+			text: "1/x"
+			font_size: 24
+			background_color: 252/255, 172/255, 172/255, 1
+            on_press: root.negpow()
+		CalBT:
+			text: "^"
+			font_size: 24
+			background_color: 252/255, 172/255, 172/255, 1
+			on_press: root.sings("**")
+		CalBT:
+			text: "SQR2"
+			font_size: 24
+			background_color: 252/255, 172/255, 172/255, 1
+            on_press: root.sqrt()
+            
+		CalBT:
+			text: "÷"
+			font_size: 30
+			background_color:255/255, 165/255, 140/255, 1
+			on_press: root.sings("/")
+#===========================================================================
+		CalBT:
+			text: "7"
+			font_size: 30
+			on_press: root.button_press(7)
+
+
+		CalBT:
+			text: "8"
+			font_size: 30
+			on_press: root.button_press(8)
+
+
+		CalBT:
+			text: "9"
+			font_size: 30
+			on_press: root.button_press(9)
+
+		CalBT:
+			text: "x"
+			font_size: 24
+			background_color:255/255, 165/255, 140/255, 1
+			on_press: root.sings("*")
+#===========================================================================
+		CalBT:
+			text: "4"
+			font_size: 30
+			on_press: root.button_press(4)
+
+
+		CalBT:
+			text: "5"
+			font_size: 30
+			on_press: root.button_press(5)
+		
+		CalBT:
+			text: "6"
+			font_size: 30
+			on_press: root.button_press(6)
+
+		CalBT:
+			text: "-"
+			font_size: 30
+			background_color:255/255, 165/255, 140/255, 1
+			on_press: root.sings("-")
+#===========================================================================
+		CalBT:
+			text: "1"
+			font_size: 30
+			on_press: root.button_press(1)
+
+		CalBT:
+			text: "2"
+			font_size: 30
+			on_press: root.button_press(2)
+
+			
+
+		CalBT:
+			text: "3"
+			font_size: 30
+			on_press: root.button_press(3)
+
+
+		CalBT:
+			text: "+"
+			font_size: 30
+			background_color:255/255, 165/255, 140/255, 1
+			on_press: root.sings("+")
+#===========================================================================
+		CalBT:
+			text: "+/-"
+			font_size: 24
+			background_color: 252/255, 172/255, 172/255, 1
+			on_press: root.positive_negative()
+		CalBT:
+			text: "0"
+			font_size: 30
+			on_press: root.button_press(0)
+
+		CalBT:
+			text: "."
+			font_size: 30
+			background_color: 252/255, 172/255, 172/255, 1
+			on_press: root.dot()
+		CalBT:
+			text: "="
+			font_size: 30
+			background_color:255/255, 165/255, 140/255, 1
+			on_press: root.results()
+<Tab_Math_Class4>:
+    ScreenManager:
+        Screen_Topic_M4:
+        Screen_Math_Logic:
+        Screen_Math_Probability:
+
+
+<Screen_Topic_M4>
+    name: 'Topic_M4'
+    canvas.before:
+        Color:
+            rgba: 255/255, 243/255, 225/255, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    ScrollView:
+        MDGridLayout:  
+         
+            size_hint_y: None
+            cols: 1
+            height: self.minimum_height          
+            row_default_height: 120
+            row_force_default: True
+            padding: 12
+            spacing:12
+
+            CheeseCard:
+    
+                text:"Logic"
+                image: "images/Logic.png"
+                on_press:                   
+                    root.manager.current = 'Math_Logic'
+ 
+
+            CheeseCard:
+
+                text:"Probability"
+                image: "images/Probability.png"
+                on_press:                   
+                    root.manager.current = 'Math_Probability'
+
+ 
+<CheeseCard@MDCard>:
+    md_bg_color:255/255, 210/255, 139/255, 1
+    padding:dp(12)
+    spacing:dp(12)
+    radius:dp(25)
+    elevation: 0
+
+
+    ripple_behavior: True
+    image:''
+    text:""
+   
+
+ 
+    Image:
+        source:root.image
+
+
+    MDLabel:
+        halign:"center"
+        text:root.text
+        
+        font_size:22
+
+
+<CheeseBT@Button>
+    background_normal: ''
+    background_color: 113/255, 157/255, 145/255, 1
+    height: dp(35)
+    size_hint_y:None     
+<Screen_Math_Logic>
+    name: 'Math_Logic'
+    canvas.before:
+        Color:
+            rgba: 255/255, 243/255, 225/255, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    ScrollView:
+        MDGridLayout:  
+         
+            size_hint_y: None
+            cols: 1
+            height: self.minimum_height          
+            row_default_height: 50
+            row_force_default: True
+            padding: 12
+            spacing:12
+            MDIconButton:
+                icon: 'arrow-left'
+                on_press: root.manager.current = 'Topic_M4' 
+      
+
+            MDLabel:
+                text:"Logic"
+                halign:"center"
+                size_hint_y:None
+                font_size:52
+                pos_hint: {"center_y": .95}
+               
+            MDBoxLayout:
+                orientation: 'vertical'
+                TextInput:
+					
+                    text:"Press buttons to input"
+                    multiline:False   
+                    height: dp(60)
+                    size_hint_y:None
+                
+                MDGridLayout:
+                    cols:6
+                    rows:2
+                    spacing:2
+                    CheeseBT:
+                        text:"v"
+                        # v     ~    ^   ->     <->    P     Q    R     (     )
+                    CheeseBT:
+                        text:"~"
+                    CheeseBT:
+                        text:"^"
+                    CheeseBT:
+                        text:"->"
+                    CheeseBT:
+                        text:"<->"
+                    CheeseBT:
+                        text:"«"
+                        background_color: 255/255, 165/255, 140/255, 1
+                    CheeseBT:
+                        text:"P"
+                        background_color: 252/255, 172/255, 172/255, 1
+                    CheeseBT:
+                        text:"Q"
+                        background_color: 252/255, 172/255, 172/255, 1
+                    CheeseBT:
+                        text:"R"
+                        background_color: 252/255, 172/255, 172/255, 1
+                    CheeseBT:
+                        text:"("
+                        background_color: 255/255, 210/255, 139/255, 1
+                    CheeseBT:
+                        text:")"
+                        background_color: 255/255, 210/255, 139/255, 1                   
+                    CheeseBT:
+                        text:"Cal"
+                        background_color: 255/255, 165/255, 140/255, 1
+            MDLabel:
+                text:""
+            MDLabel:
+                text:""
+            MDLabel:
+                text:"Variables Setting"
+                halign:"center"
+                font_size:24
+                size_hint_y:None
+                pos_hint: {"center_y": .99}
+            MDGridLayout:
+                cols:3
+                rows:4
+                spacing:2
+                size_hint_y:None
+
+                CheeseBT:
+                    text:"P"
+                    size_hint_x:  .333
+                    background_color: 255/255, 210/255, 139/255, 1
+                Check_P:
+                    pos_hint: {'center_x': .5, 'center_y': .5}
+                    size_hint_x:  .333
+                Check_P:
+                    size_hint_x:  .333
+                    pos_hint: {'center_x': .5, 'center_y': .5}                       
+                CheeseBT:
+                    size_hint_x:  .333
+                    text:"Q"
+                    background_color: 252/255, 172/255, 172/255, 1
+                Check_Q:
+                    pos_hint: {'center_x': .5, 'center_y': .5}
+                    size_hint_x:  .333
+                Check_Q:
+                    size_hint_x:  .333
+                    pos_hint: {'center_x': .5, 'center_y': .5}  
+                CheeseBT:
+                    size_hint_x:  .333
+                    text:"R"
+                Check_R:
+                    pos_hint: {'center_x': .5, 'center_y': .5}
+                    size_hint_x:  .333
+                Check_R:
+                    size_hint_x:  .333
+                    pos_hint: {'center_x': .5, 'center_y': .5}  
+                CheeseBT:
+                    size_hint_x:  .333
+                    background_color:0,0,0,0
+                CheeseBT:
+                    size_hint_x:  .333
+                    text:"T"
+                    background_color: 255/255, 165/255, 140/255, 1
+                CheeseBT:
+                    size_hint_x:  .333
+                    text:"F"
+                    background_color: 255/255, 165/255, 140/255, 1
+
+ 
+                    
+
+<Check_P@MDCheckbox>:
+    group: 'group_P'
+    size_hint: None, None
+    size: dp(48), dp(48) 
+
+<Check_Q@MDCheckbox>:
+    group: 'group_Q'
+    size_hint: None, None
+    size: dp(48), dp(48) 
+
+<Check_R@MDCheckbox>:
+    group: 'group_R'
+    size_hint: None, None
+    size: dp(48), dp(48) 
+ 
+
+                    
+    
+<Screen_Math_Probability>:
+    name: 'Math_Probability'
+    canvas.before:
+        Color:
+            rgba: 255/255, 243/255, 225/255, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+  
+    MDGridLayout:  
+        
+        
+        cols: 1
+        height: self.minimum_height          
+        row_default_height: 50
+        row_force_default: True
+        padding: 12
+        spacing:12
+        MDIconButton:
+            icon: 'arrow-left'
+            on_press: root.manager.current = 'Topic_M4' 
+        MDLabel:
+            text:"Probability"
+            halign:"center"
+            size_hint_y:None
+            font_size:42
+        MDBoxLayout:
+            orientation: 'vertical'
+
+            
+            MDGridLayout:
+                cols:2
+                rows:4
+                spacing:2
+                CheeseBT:
+                    text:"Value x"
+                    size_hint_x:.333
+                    background_color: 255/255, 210/255, 139/255, 1
+                    # v     ~    ^   ->     <->    P     Q    R     (     )
+                TextInput:
+                    text:  ''
+                    multiline:False
+                CheeseBT:
+                    text:"Value y"
+                    size_hint_x:.333
+                    background_color: 252/255, 172/255, 172/255, 1
+                TextInput:
+                    text:   ''
+                    multiline:False
+                CheeseBT:
+                    text:"Value z"
+                    size_hint_x:.333
+                TextInput:
+                    text:  "" 
+                    multiline:False
+                CheeseBT:
+                    size_hint_x:  .333
+                    background_color: 0,0,0,0
+                    size_hint_x:0
+                CheeseBT:
+                    
+                    text:"Cal"
+                    background_color: 255/255, 165/255, 140/255, 1
+
+
+                
+<Tab_Physics_Class4>:
+    ScreenManager:
+        Screen_Topic_P4:
+        Screen_Physics_Motion:
+        Screen_Physics_Force:
+
+<Screen_Topic_P4>
+    name: 'Topic_P4'
+    canvas.before:
+        Color:
+            rgba: 255/255, 243/255, 225/255, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    ScrollView:
+        MDGridLayout:  
+         
+            size_hint_y: None
+            cols: 1
+            height: self.minimum_height          
+            row_default_height: 120
+            row_force_default: True
+            padding: 12
+            spacing:12
+
+            CheeseCard:
+    
+                text:"Motion"
+                image: "images/Motion.png"
+                on_press:                   
+                    root.manager.current = 'Physics_Motion'
+ 
+
+            CheeseCard:
+
+                text:"Force"
+                image: "images/Force.png"
+                on_press:                   
+                    root.manager.current = 'Physics_Force'
+<Screen_Physics_Motion>:
+    name: 'Physics_Motion'
+    canvas.before:
+        Color:
+            rgba: 255/255, 243/255, 225/255, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+  
+    MDGridLayout:  
+        
+        
+        cols: 1
+        height: self.minimum_height          
+        row_default_height: 50
+        row_force_default: True
+        padding: 12
+        spacing:12
+        MDIconButton:
+            icon: 'arrow-left'
+            on_press: root.manager.current = 'Topic_P4' 
+        MDLabel:
+            text:"Motion"
+            halign:"center"
+            size_hint_y:None
+            font_size:42
+        MDBoxLayout:
+            orientation: 'vertical'
+
+            
+            MDGridLayout:
+                cols:2
+                rows:4
+                spacing:2
+                CheeseBT:
+                    text:"Value x"
+                    size_hint_x:.333
+                    background_color: 255/255, 210/255, 139/255, 1
+                    # v     ~    ^   ->     <->    P     Q    R     (     )
+                TextInput:
+                    text:  ''
+                    multiline:False
+                CheeseBT:
+                    text:"Value y"
+                    size_hint_x:.333
+                    background_color: 252/255, 172/255, 172/255, 1
+                TextInput:
+                    text:   ''
+                    multiline:False
+                CheeseBT:
+                    text:"Value z"
+                    size_hint_x:.333
+                TextInput:
+                    text:  "" 
+                    multiline:False
+                CheeseBT:
+                    size_hint_x:  .333
+                    background_color: 0,0,0,0
+                    size_hint_x:0
+                CheeseBT:
+                    
+                    text:"Cal"
+                    background_color: 255/255, 165/255, 140/255, 1
+
+<Screen_Physics_Force>:
+    name: 'Physics_Force'
+    canvas.before:
+        Color:
+            rgba: 255/255, 243/255, 225/255, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+  
+    MDGridLayout:  
+        
+        
+        cols: 1
+        height: self.minimum_height          
+        row_default_height: 50
+        row_force_default: True
+        padding: 12
+        spacing:12
+        MDIconButton:
+            icon: 'arrow-left'
+            on_press: root.manager.current = 'Topic_P4' 
+        MDLabel:
+            text:"Force"
+            halign:"center"
+            size_hint_y:None
+            font_size:42
+        MDBoxLayout:
+            orientation: 'vertical'
+
+            
+            MDGridLayout:
+                cols:2
+                rows:4
+                spacing:2
+                CheeseBT:
+                    text:"Value x"
+                    size_hint_x:.333
+                    background_color: 255/255, 210/255, 139/255, 1
+                    # v     ~    ^   ->     <->    P     Q    R     (     )
+                TextInput:
+                    text:  ''
+                    multiline:False
+                CheeseBT:
+                    text:"Value y"
+                    size_hint_x:.333
+                    background_color: 252/255, 172/255, 172/255, 1
+                TextInput:
+                    text:   ''
+                    multiline:False
+                CheeseBT:
+                    text:"Value z"
+                    size_hint_x:.333
+                TextInput:
+                    text:  "" 
+                    multiline:False
+                CheeseBT:
+                    size_hint_x:  .333
+                    background_color: 0,0,0,0
+                    size_hint_x:0
+                CheeseBT:
+                    
+                    text:"Cal"
+                    background_color: 255/255, 165/255, 140/255, 1
+
+<Tab_Chemistry_Class4>:
+    ScreenManager:
+        Screen_Topic_C4:
+        Screen_Chemistry_Mole_Conversion:
+        Screen_Chemistry_Gas_theory:
+
+<Screen_Topic_C4>
+    name: 'Topic_C4'
+    canvas.before:
+        Color:
+            rgba: 255/255, 243/255, 225/255, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    ScrollView:
+        MDGridLayout:  
+         
+            size_hint_y: None
+            cols: 1
+            height: self.minimum_height          
+            row_default_height: 120
+            row_force_default: True
+            padding: 12
+            spacing:12
+
+            CheeseCard:
+    
+                text:"Mole Conversion"
+                image: "images/Mole_Conversion.png"
+                on_press:                   
+                    root.manager.current = 'Mole_Conversion'
+ 
+
+            CheeseCard:
+
+                text:"Gas theory"
+                image: "images/Gas_theory.png"
+                on_press:                   
+                    root.manager.current = 'Gas_theory'
+<Screen_Chemistry_Mole_Conversion>:
+    name: 'Mole_Conversion'
+    canvas.before:
+        Color:
+            rgba: 255/255, 243/255, 225/255, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+  
+    MDGridLayout:  
+        
+        
+        cols: 1
+        height: self.minimum_height          
+        row_default_height: 50
+        row_force_default: True
+        padding: 12
+        spacing:12
+        MDIconButton:
+            icon: 'arrow-left'
+            on_press: root.manager.current = 'Topic_C4' 
+        MDLabel:
+            text:"Mole Conversion"
+            halign:"center"
+            size_hint_y:None
+            font_size:32
+        MDBoxLayout:
+            orientation: 'vertical'
+
+            
+            MDGridLayout:
+                cols:2
+                rows:4
+                spacing:2
+                CheeseBT:
+                    text:"Value x"
+                    size_hint_x:.333
+                    background_color: 255/255, 210/255, 139/255, 1
+                    # v     ~    ^   ->     <->    P     Q    R     (     )
+                TextInput:
+                    text:  ''
+                    multiline:False
+                CheeseBT:
+                    text:"Value y"
+                    size_hint_x:.333
+                    background_color: 252/255, 172/255, 172/255, 1
+                TextInput:
+                    text:   ''
+                    multiline:False
+                CheeseBT:
+                    text:"Value z"
+                    size_hint_x:.333
+                TextInput:
+                    text:  "" 
+                    multiline:False
+                CheeseBT:
+                    size_hint_x:  .333
+                    background_color: 0,0,0,0
+                    size_hint_x:0
+                CheeseBT:
+                    
+                    text:"Cal"
+                    background_color: 255/255, 165/255, 140/255, 1
+
+<Screen_Chemistry_Gas_theory>:
+    name: 'Gas_theory'
+    canvas.before:
+        Color:
+            rgba: 255/255, 243/255, 225/255, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+  
+    MDGridLayout:  
+        
+        
+        cols: 1
+        height: self.minimum_height          
+        row_default_height: 50
+        row_force_default: True
+        padding: 12
+        spacing:12
+        MDIconButton:
+            icon: 'arrow-left'
+            on_press: root.manager.current = 'Topic_C4' 
+        MDLabel:
+            text:"Gas theory"
+            halign:"center"
+            size_hint_y:None
+            font_size:42
+        MDBoxLayout:
+            orientation: 'vertical'
+
+            
+            MDGridLayout:
+                cols:2
+                rows:4
+                spacing:2
+                CheeseBT:
+                    text:"Value x"
+                    size_hint_x:.333
+                    background_color: 255/255, 210/255, 139/255, 1
+                    # v     ~    ^   ->     <->    P     Q    R     (     )
+                TextInput:
+                    text:  ''
+                    multiline:False
+                CheeseBT:
+                    text:"Value y"
+                    size_hint_x:.333
+                    background_color: 252/255, 172/255, 172/255, 1
+                TextInput:
+                    text:   ''
+                    multiline:False
+                CheeseBT:
+                    text:"Value z"
+                    size_hint_x:.333
+                TextInput:
+                    text:  "" 
+                    multiline:False
+                CheeseBT:
+                    size_hint_x:  .333
+                    background_color: 0,0,0,0
+                    size_hint_x:0
+                CheeseBT:
+                    
+                    text:"Cal"
+                    background_color: 255/255, 165/255, 140/255, 1
+ 
